@@ -373,7 +373,7 @@
       labelName: 'الاسم',
       placeholderName: 'اكتبي اسمك',
       labelPhone: 'رقم الجوال',
-      placeholderPhone: '05XXXXXXXX',
+      placeholderPhone: '05XXXXXXXX أو +رمز الدولة',
       labelSession: 'الجلسة المطلوبة',
       selectPlaceholder: '— اختاري الجلسة —',
       ctaText: 'احجزي جلستك الآن',
@@ -405,7 +405,7 @@
       labelName: 'Full Name',
       placeholderName: 'Enter your name',
       labelPhone: 'Phone Number',
-      placeholderPhone: '+966 5X XXX XXXX',
+      placeholderPhone: '05XXXXXXXX or +country code',
       labelSession: 'Select Treatment',
       selectPlaceholder: '— Choose a session —',
       ctaText: 'Book My Session Now',
@@ -500,11 +500,17 @@
   // ── Form Submit ──
   function submitForm() {
     const name    = document.getElementById('inputName').value.trim();
-    const phone   = document.getElementById('inputPhone').value.trim();
+    const phone   = document.getElementById('inputPhone').value.trim().replace(/\s+/g, '');
     const session = document.getElementById('inputSession').value;
 
     if (!name || !phone || !session) {
       alert(t.required);
+      return;
+    }
+
+    const phoneRegex = /^(\+?966|00966)?0?5\d{8}$|^\+?[1-9]\d{6,14}$/;
+    if (!phoneRegex.test(phone)) {
+      alert(isAr ? 'يرجى إدخال رقم جوال صحيح' : 'Please enter a valid phone number');
       return;
     }
 
