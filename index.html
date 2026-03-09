@@ -332,7 +332,7 @@
 
 <script>
   // ── REPLACE THIS with your Google Apps Script URL ──
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbw4DflFjjdmnrkDFUXUKzGbSjGTLyfoeLMy3x8H_hp9BOkOKeTDG8wAWn6VPYnKVexR/exec';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwHInHR8O4u7z2G1YAnZHEp43wYOdRia30fJmKa65fMUIGGHRHpxkjvcKmGEMTc_96R6A/exec';
 
   // ── Language ──
   const lang = navigator.language || 'ar';
@@ -514,7 +514,7 @@
 
     const params = new URLSearchParams({ name, phone, session, lang: isAr ? 'ar' : 'en', timestamp: new Date().toLocaleString() });
 
-    fetch(SHEET_URL, { method: 'POST', body: params })
+    fetch(SHEET_URL + '?' + params.toString(), { method: 'GET', mode: 'no-cors' })
       .then(() => {
         btn.style.display = 'none';
         document.getElementById('ctaSecondary').style.display = 'none';
